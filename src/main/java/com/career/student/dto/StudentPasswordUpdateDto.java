@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StudentPasswordUpdateDto {
 
-	@NotNull
+	@NotNull(message = "Email cannot be null")
 	private String email;
 	
 	@NotNull
