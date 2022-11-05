@@ -49,12 +49,12 @@ public class StudentController {
 	@PostMapping("login")
 	public ResponseEntity<ResponseDto> loginStudent(@RequestBody @Valid LoginDto loginDto)
 			throws EmailAlreadyExistsException {
-		if (studentService.loginStudent(loginDto).equals(AppConstants.SAVE_FAIURE))
-			return new ResponseEntity<>(new ResponseDto(AppConstants.SAVE_FAIURE, HttpStatus.BAD_REQUEST.value(),
-					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
+		if (studentService.loginStudent(loginDto).equals(AppConstants.LOGIN_SUCCESS))
+			return new ResponseEntity<>(new ResponseDto(AppConstants.LOGIN_SUCCESS, HttpStatus.OK.value(),
+					LocalDateTime.now().toString()), HttpStatus.OK);
 		return new ResponseEntity<>(
-				new ResponseDto(AppConstants.SAVE_SUCCESS, HttpStatus.CREATED.value(), LocalDateTime.now().toString()),
-				HttpStatus.CREATED);
+				new ResponseDto(AppConstants.LOGIN_FAILURE, HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString()),
+				HttpStatus.BAD_REQUEST);
 	}
 	
 	
