@@ -7,15 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class StudentPasswordUpdateDto {
-
-	@NotNull
+@NoArgsConstructor
+public class LoginDto {
+	
+	@NotNull(message = "Email cannot be null")
 	private String email;
 	
 	@NotNull
 	private String password;
-
-
+	
 }
