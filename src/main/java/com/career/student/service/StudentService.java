@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.career.exceptions.EmailAlreadyExistsException;
+import com.career.exceptions.StudentNotFoundException;
+import com.career.student.dto.LoginDto;
 import com.career.student.dto.StudentPasswordUpdateDto;
 import com.career.student.dto.StudentRegistrationDto;
 import com.career.student.dto.StudentUpdateDto;
@@ -28,4 +30,6 @@ public interface StudentService {
 	List<Student> getAllActiveStudents();
 		
 	String emailAlreadyExists(String email);
+	
+	String loginStudent(LoginDto loginDto) throws StudentNotFoundException;
 }

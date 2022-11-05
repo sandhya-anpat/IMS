@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.career.constants.AppConstants;
 import com.career.exceptions.EmailAlreadyExistsException;
+import com.career.exceptions.IncorrectPasswordException;
+import com.career.exceptions.StudentNotFoundException;
+import com.career.student.dto.LoginDto;
 import com.career.student.dto.StudentPasswordUpdateDto;
 import com.career.student.dto.StudentRegistrationDto;
 import com.career.student.dto.StudentUpdateDto;
@@ -36,6 +39,21 @@ public class StudentServiceImpl implements StudentService {
 			else
 				response = AppConstants.SAVE_FAIURE;
 		}
+		return response;
+	}
+	
+	@Override
+	public String loginStudent(LoginDto loginDto) throws StudentNotFoundException{
+		List<Student> findByEmail = studentRepo.findByEmail(loginDto.getEmail());
+		if(findByEmail.size()==0)
+//			response = AppConstants.NOT_FOUND;
+			throw new StudentNotFoundException();
+		else if(findByEmail.size()==1)
+			if(!loginDto.getPassword().equals(findByEmail.get(0).getPassword()))
+//				response = AppConstants.INCORRECT_PASSWORD;
+				throw new IncorrectPasswordException();
+			else
+				response = AppConstants.LOGIN_SUCCESS;
 		return response;
 	}
 
@@ -75,6 +93,8 @@ public class StudentServiceImpl implements StudentService {
 		Student entity = mapper.map(studentUpdateDto, Student.class);
 		return studentRepo.save(entity);
 	}
+	
+	
 
 	@Override
 	public String deleteStudent(Long id) {
