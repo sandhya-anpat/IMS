@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>IMS_1</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>IMS_1</name>
+	<artifactId>IMS</artifactId>
+	<version>1.0</version>
+	<name>IMS</name>
 	<description>Institute Management System</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -70,6 +70,14 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>8.0.0.Final</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 
 	</dependencies>
 
