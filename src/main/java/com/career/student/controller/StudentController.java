@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.career.constants.AppConstants;
@@ -27,6 +28,8 @@ import com.career.student.dto.StudentRegistrationDto;
 import com.career.student.dto.StudentUpdateDto;
 import com.career.student.entity.Student;
 import com.career.student.service.StudentService;
+
+import net.bytebuddy.asm.Advice.Return;
 
 @RestController
 @RequestMapping("student")
@@ -97,4 +100,22 @@ public class StudentController {
 				new ResponseDto(AppConstants.NOT_FOUND, HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
 				HttpStatus.NOT_FOUND);
 	}
+	
+	@PutMapping("deleteStudentById/{id}")
+	public ResponseEntity<ResponseDto> deleteStudentById(@RequestParam Long id){
+		if(AppConstants.DELETE_SUCCESS.equals(studentService.deleteStudentById(id)))
+				return new ResponseEntity<>(
+						new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
+						HttpStatus.OK);
+			return new ResponseEntity<>(
+					new ResponseDto(AppConstants.NOT_FOUND,  HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
+				HttpStatus.NOT_FOUND);
+					
+		
+		
+		
+	}
+	
+	
+	
 }
