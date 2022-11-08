@@ -32,4 +32,6 @@ public interface StudentService {
 	String emailAlreadyExists(String email);
 	
 	String loginStudent(LoginDto loginDto) throws StudentNotFoundException;
+
+	String deleteStudentById(Long id);
 }

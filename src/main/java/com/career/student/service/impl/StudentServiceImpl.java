@@ -56,6 +56,21 @@ public class StudentServiceImpl implements StudentService {
 				response = AppConstants.LOGIN_SUCCESS;
 		return response;
 	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public String deleteStudentById(Long id) {
+		
+		if(!studentRepo.existsById(id))
+			throw new StudentNotFoundException();
+		else {
+			Student byId = studentRepo.getById(id);
+			byId.setActive(false);
+			studentRepo.save(byId);
+			response = AppConstants.DELETE_SUCCESS;
+		}
+		return response;
+	}
 
 	@Override
 	public Student updatePassword(StudentPasswordUpdateDto passwordUpdateDto) {
