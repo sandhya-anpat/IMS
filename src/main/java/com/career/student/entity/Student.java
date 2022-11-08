@@ -12,8 +12,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -83,4 +81,21 @@ public class Student {
 	@Column(name = "batchCode", columnDefinition = "varchar default false")
 	private String batchCode = "SDE13";
 
+	// For registration through main() method
+	public Student(@NotNull @Size(min = 3, message = "Firstname should contain atleast 3 characters") String firstName,
+			@NotNull @Size(min = 3, message = "Lastname should contain atleast 3 characters") String lastName,
+			@NotNull String email,
+			@Size(min = 10, max = 10, message = "Mobile number should contain 10 digits only") String mobile,
+			@NotNull String education, @NotNull String passingYear, @NotNull Long basePackage) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.mobile = mobile;
+		this.education = education;
+		this.passingYear = passingYear;
+		this.basePackage = basePackage;
+	}
+
+	
 }
