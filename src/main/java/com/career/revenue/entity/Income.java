@@ -29,9 +29,16 @@ public class Income {
 	@NotNull
 	private Long studentId;
 	private Long amount;
-	private Long categoryId;
+	
+	private Long totalFees;
+	private Long balanceFees;
+	private Long paidFees;
+	
+	
+	private Long incomeCategory;
 	private String transactionId;
 	private String courierId;
+	private String certificationName;
 
 	// audit columns
 	@CreationTimestamp
