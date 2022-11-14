@@ -1,36 +1,31 @@
 package com.career.constants;
 
 public class AppConstants {
-	
-	public static String SAVE_SUCCESS = "STUDENT SAVED SUCCESSFULLY";
-	
-	public static String SAVE_FAIURE = "STUDENT COULD NOT BE SAVED";
 
-	public static String NOT_FOUND = "STUDENT NOT FOUND";
-	
-	public static String PASSWORD_UPDATE_SUCCESS = "PASSWORD UPDATED SUCCESSFULLY";
-	
-	public static String PASSWORD_UPDATE_FAILURE = "PASSWORD COULD NOT BE SAVED";
-	
-	public static String STUDENT_UPDATE_SUCCESS = "STUDENT UPDATED SUCCESSFULLY";
-	
-	public static String STUDENT_UPDATE_FAILURE = "STUDENT COULD NOT BE UPDATED";
-	
-	public static String ACTIVE_STUDENTS_FOUND = "ACTIVE STUDENTS FOUND SUCCESSFULLY";
-	
-	public static String ACTIVE_STUDENTS_NOT_FOUND = "ACTIVE STUDENTS NOT FOUND";
-	
-	public static String DELETE_SUCCESS = "DELETED SUCCESSFULLY";
-	
-	public static String DELETE_FAILURE = "COULD NOT BE DELETED";
+	public static final String SAVE_SUCCESS = "STUDENT SAVED SUCCESSFULLY";
+	public static final String SAVE_FAIURE = "STUDENT COULD NOT BE SAVED";
+	public static final String NOT_FOUND = "STUDENT NOT FOUND";
+	public static final String PASSWORD_UPDATE_SUCCESS = "PASSWORD UPDATED SUCCESSFULLY";
+	public static final String PASSWORD_UPDATE_FAILURE = "PASSWORD COULD NOT BE SAVED";
+	public static final String STUDENT_UPDATE_SUCCESS = "STUDENT UPDATED SUCCESSFULLY";
+	public static final String STUDENT_UPDATE_FAILURE = "STUDENT COULD NOT BE UPDATED";
+	public static final String ACTIVE_STUDENTS_FOUND = "ACTIVE STUDENTS FOUND SUCCESSFULLY";
+	public static final String ACTIVE_STUDENTS_NOT_FOUND = "ACTIVE STUDENTS NOT FOUND";
+	public static final String DELETE_SUCCESS = "DELETED SUCCESSFULLY";
+	public static final String DELETE_FAILURE = "COULD NOT BE DELETED";
+	public static final String LOGIN_SUCCESS = "LOGGED IN SUCCESSFULLY";
+	public static final String LOGIN_FAILURE = "LOGIN FAILED";
+	public static final String EMAIL_ALREADY_EXISTS = "EMAIL ALREADY EXISTS";
+	public static final String EMAIL_DOESNT_EXIST = "EMAIL DOESN'T EXIST";
+	public static final String MENTOR_FEE = "MENTOR FEE";
+	public static final String MAIN_FEE = "MAIN FEE";
+	public static final String CERTIFICATION_CHARGES = "CERTIFICATION CHARGES";
+	public static final String MENTOR_SALARY = "MENTOR SALARY";
+	public static final String FEES_ALREADY_PAID = "FEES ALREADY PAID";
+	public static final String PAY_LIMIT_EXCEEDED = "PAY LIMIT EXCEEDED";
+	public static final String PAYMENT_SUCCESSFUL = "PAYMENT SUCCESSFUL";
+	public static final String PAYMENT_FAILED = "PAYMENT FAILED";
 
-	public static String LOGIN_SUCCESS = "LOGGED IN SUCCESSFULLY";
-	
-	public static String LOGIN_FAILURE = "LOGIN FAILED";
-	
-	public static String EMAIL_ALREADY_EXISTS = "EMAIL ALREADY EXISTS"; 
-	
-	public static String EMAIL_DOESNT_EXIST = "EMAIL DOESN'T EXIST";
-	
-	
+
+
 }
