@@ -27,6 +27,14 @@ public class AppConstants {
 	public static final String PAYMENT_FAILED = "PAYMENT FAILED";
 	public static final String MENTOR_SALARY_SUCCESS = "MENTOR SALARY SUCCESS";
 	public static final String MENTOR_SALARY_FAILED = "MENTOR SALARY FAILED";
+	public static final String RENT_PAYMENT_SUCCESSFUL = "RENT PAYMENT SUCCESSFUL";
+	public static final String RENT_PAYMENT_FAILED = "RENT PAYMENT FAILED";
+	public static final String ELECTRICITY_PAYMENT_FAILED = "ELECTRICITY PAYMENT FAILED";
+	public static final String ELECTRICITY_PAYMENT_SUCCESSFUL = "ELECTRICITY PAYMENT SUCCESSSFUL";
+	public static final String OTHERS_PAYMENT_SUCCESSFUL = "OTHERS PAYMENT SUCCESSSFUL";
+	public static final String OTHERS_PAYMENT_FAILED = "ELECTRICITY PAYMENT FAILED";
+
+
 
 	
 
