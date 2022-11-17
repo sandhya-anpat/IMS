@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -26,9 +27,19 @@ public class Expences {
 	@CreationTimestamp
 	private LocalDateTime createdOn;
 	
+	@NotNull
+	private Long mentorId;
+	
+	@NotNull
+	private Long amount;
+	
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
+	
+	@NotNull
 	private String createdBy;
+	
+	@NotNull
 	private String updatedBy;
 	
 	@Column(name = "active", columnDefinition = "boolean default true")

@@ -25,7 +25,9 @@ public class AppConstants {
 	public static final String PAY_LIMIT_EXCEEDED = "PAY LIMIT EXCEEDED";
 	public static final String PAYMENT_SUCCESSFUL = "PAYMENT SUCCESSFUL";
 	public static final String PAYMENT_FAILED = "PAYMENT FAILED";
+	public static final String MENTOR_SALARY_SUCCESS = "MENTOR SALARY SUCCESS";
+	public static final String MENTOR_SALARY_FAILED = "MENTOR SALARY FAILED";
 
-
+	
 
 }
