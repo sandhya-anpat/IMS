@@ -28,16 +28,29 @@ public class Income {
 	
 	@NotNull
 	private Long studentId;
+	
+	@NotNull(message = "amount cannot be null")
 	private Long amount;
 	
+	@NotNull
 	private Long totalFees;
+	
+	@NotNull
 	private Long balanceFees;
+	
+	@NotNull
 	private Long paidFees;
 	
-	
+	@NotNull(message="income category cannot be null")
 	private Long incomeCategory;
+	
+	@NotNull(message = "transaction id cannot be null")
 	private String transactionId;
+	
+	@NotNull(message = "courier id cannot be null")
 	private String courierId;
+	
+	@NotNull(message = "certification name cannot be null")
 	private String certificationName;
 
 	// audit columns
@@ -45,7 +58,11 @@ public class Income {
 	private LocalDateTime createdOn;
 	@UpdateTimestamp
 	private LocalDateTime updatedOn;
+	
+	@NotNull
 	private String createdBy;
+	
+	@NotNull
 	private String updatedBy;
 	
 	@Column(name = "active", columnDefinition = "boolean default true")
