@@ -11,18 +11,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class MentorSalaryDto {
-	
-	@NotNull
-	private Long mentorId;
+@NoArgsConstructor
+public class OthersDto {
+
 	@CreationTimestamp
 	private LocalDateTime createdOn;
 	@NotNull
 	private Long amount;
 	@NotNull
+	private String remarks;
+	@NotNull
 	private Long expenceId;
-	
-	
 }

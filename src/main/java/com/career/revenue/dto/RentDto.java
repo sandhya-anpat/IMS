@@ -13,16 +13,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MentorSalaryDto {
+public class RentDto {
 	
-	@NotNull
-	private Long mentorId;
+	
 	@CreationTimestamp
 	private LocalDateTime createdOn;
 	@NotNull
 	private Long amount;
 	@NotNull
 	private Long expenceId;
-	
-	
+
 }

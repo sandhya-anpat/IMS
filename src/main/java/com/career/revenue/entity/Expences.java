@@ -31,6 +31,9 @@ public class Expences {
 	private Long mentorId;
 	
 	@NotNull
+	private String remarks;
+	
+	@NotNull
 	private Long amount;
 	
 	@UpdateTimestamp
