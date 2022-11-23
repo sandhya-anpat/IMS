@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class StudentUpdateDto {
 
-private Long id;
+	private Long id;
 	
 	@NotNull(message = "FirstName cannot be null")
 	@Size(min = 3, message = "FirstName contains atleast 3 characters")
