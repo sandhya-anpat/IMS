@@ -37,8 +37,8 @@ public class StudentUpdateDto {
 	
 	private Long mentorId;
 	
-	@Column(name = "isContractSent", columnDefinition = "boolean default true")
-	private boolean isContractSent = true;
+//	@Column(name = "isContractSent", columnDefinition = "boolean default true")
+//	private boolean isContractSent = true;
 	
 	@CreationTimestamp
 	private LocalDateTime createdOn = LocalDateTime.now();
@@ -46,8 +46,8 @@ public class StudentUpdateDto {
 	@UpdateTimestamp
 	private LocalDateTime updateOn = LocalDateTime.now();
 	
-	@Column(name = "active", columnDefinition = "boolean default true")
-	private boolean active = true;
+//	@Column(name = "active", columnDefinition = "boolean default true")
+//	private boolean active = true;
 	
 	@NotNull
 	private String education;
@@ -55,23 +55,23 @@ public class StudentUpdateDto {
 	@NotNull
 	private String passingYear;
 	
-	private String mentor;
+//	private String mentor;
+
+//	@Column(name = "isMentorOpted", columnDefinition = "boolean default false")
+//	private boolean isMentorOpted = false;
+//	
+//	@NotNull
+//	private Long incomeId;
 	
-	@Column(name = "isMentorOpted", columnDefinition = "boolean default false")
-	private boolean isMentorOpted = false;
+//	@NotNull
+//	private Long basePackage;
 	
-	@NotNull
-	private Long incomeId;
-	
-	@NotNull
-	private Long basePackage;
-	
-	@Column(name = "formalContractRecived", columnDefinition = "boolean default false")
-	private boolean formalContractRecived = false;
-	
-	@Column(name = "formalContractGenerated", columnDefinition = "boolean default false")
-	private boolean formalContractGenerated = false;
-	
+//	@Column(name = "formalContractRecived", columnDefinition = "boolean default false")
+//	private boolean formalContractRecived = false;
+//	
+//	@Column(name = "formalContractGenerated", columnDefinition = "boolean default false")
+//	private boolean formalContractGenerated = false;
+//	
 	@Column(name = "batchCode", columnDefinition = "varchar default false")
 	private String batchCode = "SDE13";
 

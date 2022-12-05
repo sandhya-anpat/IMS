@@ -32,6 +32,6 @@ public class StudentRegistrationDto {
 	@NotNull(message = "Passing Year cannot be null")
 	private String passingYear;
 	
-	@NotNull(message = "Base Package cannot be null")
-	private Long basePackage;
+//	@NotNull(message = "Base Package cannot be null")
+//	private Long basePackage;
 }
