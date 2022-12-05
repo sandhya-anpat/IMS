@@ -4,7 +4,7 @@ public class AppConstants {
 
 	public static final String SAVE_SUCCESS = "STUDENT SAVED SUCCESSFULLY";
 	public static final String SAVE_FAIURE = "STUDENT COULD NOT BE SAVED";
-	public static final String NOT_FOUND = "STUDENT NOT FOUND";
+	public static final String STUDENT_NOT_FOUND = "STUDENT NOT FOUND";
 	public static final String PASSWORD_UPDATE_SUCCESS = "PASSWORD UPDATED SUCCESSFULLY";
 	public static final String PASSWORD_UPDATE_FAILURE = "PASSWORD COULD NOT BE SAVED";
 	public static final String STUDENT_UPDATE_SUCCESS = "STUDENT UPDATED SUCCESSFULLY";
@@ -33,6 +33,7 @@ public class AppConstants {
 	public static final String ELECTRICITY_PAYMENT_SUCCESSFUL = "ELECTRICITY PAYMENT SUCCESSSFUL";
 	public static final String OTHERS_PAYMENT_SUCCESSFUL = "OTHERS PAYMENT SUCCESSSFUL";
 	public static final String OTHERS_PAYMENT_FAILED = "ELECTRICITY PAYMENT FAILED";
+	public static final String INCORRECT_PASSWORD = "INCORRECT PASSWORD";
 
 
 

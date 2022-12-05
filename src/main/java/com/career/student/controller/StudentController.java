@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.career.constants.AppConstants;
 import com.career.dto.ResponseDto;
 import com.career.exceptions.EmailAlreadyExistsException;
+import com.career.exceptions.IncorrectPasswordException;
+import com.career.exceptions.StudentNotFoundException;
 import com.career.student.dto.LoginDto;
 import com.career.student.dto.StudentPasswordUpdateDto;
 import com.career.student.dto.StudentRegistrationDto;
@@ -49,7 +51,7 @@ public class StudentController {
 	
 	@PostMapping("login")
 	public ResponseEntity<ResponseDto> loginStudent(@RequestBody @Valid LoginDto loginDto)
-			throws EmailAlreadyExistsException {
+			throws StudentNotFoundException,IncorrectPasswordException{
 		if (studentService.loginStudent(loginDto).equals(AppConstants.LOGIN_SUCCESS))
 			return new ResponseEntity<>(new ResponseDto(AppConstants.LOGIN_SUCCESS, HttpStatus.OK.value(),
 					LocalDateTime.now().toString()), HttpStatus.OK);
@@ -95,7 +97,7 @@ public class StudentController {
 					new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
 					HttpStatus.OK);
 		return new ResponseEntity<>(
-				new ResponseDto(AppConstants.NOT_FOUND, HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
+				new ResponseDto(AppConstants.STUDENT_NOT_FOUND, HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
 				HttpStatus.NOT_FOUND);
 	}
 	
@@ -106,7 +108,7 @@ public class StudentController {
 						new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
 						HttpStatus.OK);
 			return new ResponseEntity<>(
-					new ResponseDto(AppConstants.NOT_FOUND,  HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
+					new ResponseDto(AppConstants.STUDENT_NOT_FOUND,  HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
 				HttpStatus.NOT_FOUND);	
 	}
 }
