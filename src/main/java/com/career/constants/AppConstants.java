@@ -34,6 +34,13 @@ public class AppConstants {
 	public static final String OTHERS_PAYMENT_SUCCESSFUL = "OTHERS PAYMENT SUCCESSSFUL";
 	public static final String OTHERS_PAYMENT_FAILED = "ELECTRICITY PAYMENT FAILED";
 	public static final String INCORRECT_PASSWORD = "INCORRECT PASSWORD";
+	public static final String MENTOR_SAVE_SUCCESS = "MENTOR SAVE SUCCESS";
+	public static final String MENTOR_SAVE_FAIL = "MENTOR SAVE FAIL";
+	public static final String MENTOR_UPDATE_FAIL = "MENTOR UPDATE FAIL";
+	public static final String MENTOR_UPDATE_SUCCESS = "MENTOR UPDATE SUCCESS";
+	public static final String MENTOR_NOT_FOUND = "MENTOR NOT FOUND";
+	
+	
 
 
 

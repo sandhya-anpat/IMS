@@ -25,4 +25,10 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.INCORRECT_PASSWORD,
 				HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public ResponseEntity<ResponseDto> emailAlreadyExistsExceptionHandler(){
+		return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.EMAIL_ALREADY_EXISTS, 
+				HttpStatus.BAD_REQUEST.value(),LocalDateTime.now().toString()),HttpStatus.BAD_REQUEST);
+	}
 }
