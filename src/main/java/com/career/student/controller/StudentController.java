@@ -101,7 +101,7 @@ public class StudentController {
 				HttpStatus.NOT_FOUND);
 	}
 	
-	@PutMapping("softDeleteStudentById/{id}")
+	@PutMapping("/softDeleteStudentById/{id}")
 	public ResponseEntity<ResponseDto> deleteStudentById(@RequestParam Long id){
 		if(AppConstants.DELETE_SUCCESS.equals(studentService.deleteStudentById(id)))
 				return new ResponseEntity<>(
