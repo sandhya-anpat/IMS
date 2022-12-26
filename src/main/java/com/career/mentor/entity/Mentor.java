@@ -24,6 +24,9 @@ public class Mentor {
 	private String mentorName;
 	
 	@NotNull
+	private String mentorEmail;
+	
+	@NotNull
 	private String salary;
 	
 	@Column(name = "batchCode", columnDefinition = "varchar default false")

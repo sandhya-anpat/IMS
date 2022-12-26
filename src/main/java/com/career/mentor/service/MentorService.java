@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.career.dto.ResponseDto;
 import com.career.mentor.dto.MentorUpdateDto;
+import com.career.mentor.dto.RegisterMentorDto;
 import com.career.mentor.entity.Mentor;
 
 @Service
@@ -17,9 +18,11 @@ public interface MentorService {
 
 	 Mentor getMentorById(Long id);
 
-	Mentor updateMentor(MentorUpdateDto mentorUpdateDto);
+	String updateMentor(MentorUpdateDto mentorUpdateDto);
 
 	String deleteMentor(Long mentorId);
+
+	String registerMentor(RegisterMentorDto registerMentorDto);
 		
 
 }
