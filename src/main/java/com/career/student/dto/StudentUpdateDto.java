@@ -28,8 +28,8 @@ public class StudentUpdateDto {
 	@Size(min = 3, message = "LastName contains atleast 3 characters")
 	private String lastName;
 	
-	@NotNull(message = "Email cannot be null")
-	private String email;
+//	@NotNull(message = "Email cannot be null")
+//	private String email;
 	
 	@NotNull(message = "MobileNumber cannot be null")
 	@Size

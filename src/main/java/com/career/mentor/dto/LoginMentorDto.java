@@ -1,31 +1,20 @@
 package com.career.mentor.dto;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterMentorDto {
+@Data
+public class LoginMentorDto {
 	
-	@NotNull
-	private Long mentorId;
-	
-	@NotNull
-	private String mentorName;
-	
-	@NotNull
+	@NotNull(message = "Email cannot be null")
 	private String mentorEmail;
 	
 	@NotNull
 	private String password;
-	
-	
-	@Column(name = "batchCode", columnDefinition = "varchar default false")
-	private String batchCode = "SDE13";
 
 }

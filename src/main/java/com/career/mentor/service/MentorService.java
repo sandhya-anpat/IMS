@@ -2,11 +2,10 @@ package com.career.mentor.service;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.career.dto.ResponseDto;
+import com.career.mentor.dto.LoginMentorDto;
+import com.career.mentor.dto.MentorPasswordUpdate;
 import com.career.mentor.dto.MentorUpdateDto;
 import com.career.mentor.dto.RegisterMentorDto;
 import com.career.mentor.entity.Mentor;
@@ -23,6 +22,10 @@ public interface MentorService {
 	String deleteMentor(Long mentorId);
 
 	String registerMentor(RegisterMentorDto registerMentorDto);
+
+	String loginMentor(LoginMentorDto loginMentorDto);
+
+	String updateMentorPassword(MentorPasswordUpdate passwordUpdate);
 		
 
 }
