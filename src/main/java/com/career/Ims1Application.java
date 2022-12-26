@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import com.career.mentor.entity.Mentor;
+import com.career.mentor.repo.MentorRepo;
 import com.career.student.entity.Student;
 import com.career.student.repo.StudentRepo;
 
@@ -29,6 +31,15 @@ public class Ims1Application {
 
 		studentRepo.saveAll(studentList);
 		studentRepo.flush();
+		
+		MentorRepo  mentorRepo = run.getBean(MentorRepo.class);
+		
+		List<Mentor> mentorList = Arrays.asList(
+				new Mentor(1L,"Vaibhav","500000","SDE13",true),
+				new Mentor(2L,"Rahul","500000","SDE14",true));
+		
+		mentorRepo.saveAll(mentorList);
+		mentorRepo.flush();
 	}
 
 	@Bean

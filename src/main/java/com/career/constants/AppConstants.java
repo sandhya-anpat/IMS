@@ -34,6 +34,10 @@ public class AppConstants {
 	public static final String OTHERS_PAYMENT_SUCCESSFUL = "OTHERS PAYMENT SUCCESSSFUL";
 	public static final String OTHERS_PAYMENT_FAILED = "ELECTRICITY PAYMENT FAILED";
 	public static final String INCORRECT_PASSWORD = "INCORRECT PASSWORD";
+<<<<<<< HEAD
+	
+	public static final String MENTOR_NOT_FOUND = "MENTOR NOT FOUND";
+=======
 	public static final String MENTOR_SAVE_SUCCESS = "MENTOR SAVE SUCCESS";
 	public static final String MENTOR_SAVE_FAIL = "MENTOR SAVE FAIL";
 	public static final String MENTOR_UPDATE_FAIL = "MENTOR UPDATE FAIL";
@@ -44,6 +48,7 @@ public class AppConstants {
 	public static final String MENTOR_PASSWORD_UPDATE_SUCCESSFUL = "MENTOR PASSWORD UPDATE SUCCESSFUL";
 	public static final String MENTOR_PASSWORD_UPDATE_FAIL = "MENTOR PASSWORD UPDATE FAIL";
 	
+>>>>>>> 576498f9183fe513d62dc21f3b20d84e491fe487
 
 
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.career.constants.AppConstants;
@@ -97,14 +98,44 @@ public class MentorController {
 					LocalDateTime.now().toString()), HttpStatus.OK);
 	}
 	
+	@GetMapping("active")
+	public ResponseEntity<List<Mentor>> getAllActiveMentor(){
+		return new ResponseEntity<>(mentorService.getAllActiveMentor(), HttpStatus.FOUND);
+	} 
+	
+	
 	@DeleteMapping("/{mentorId}")
 	public ResponseEntity<ResponseDto> deleteMentor(@PathVariable Long mentorId){
+<<<<<<< HEAD
+		String response = mentorService.deleteMentor(mentorId);
+		if(response.equals(AppConstants.DELETE_SUCCESS)) 
+			return new ResponseEntity<>(
+					new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
+					HttpStatus.OK);
+		
+		return new ResponseEntity<>(
+				new ResponseDto(AppConstants.MENTOR_NOT_FOUND, HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
+				HttpStatus.NOT_FOUND);
+=======
 		if(AppConstants.DELETE_FAILURE.equals(mentorService.deleteMentor(mentorId))) 
 				return new ResponseEntity<>(new ResponseDto(AppConstants.DELETE_FAILURE, HttpStatus.NOT_FOUND.value(),
 						LocalDateTime.now().toString()),HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(),
 						LocalDateTime.now().toString()),HttpStatus.OK);
+>>>>>>> 576498f9183fe513d62dc21f3b20d84e491fe487
 	}
 	
+	@PutMapping("softDeleteMentorById")
+	public ResponseEntity<ResponseDto> deleteMentorById(@RequestParam Long mentorId){
+		String response = mentorService.deleteMentorById(mentorId);
+		if(response.equals(AppConstants.DELETE_SUCCESS))
+			return new ResponseEntity<>(
+					new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
+					HttpStatus.OK);
+		
+		return new ResponseEntity<>(
+				new ResponseDto(AppConstants.MENTOR_NOT_FOUND,HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
+				HttpStatus.OK);
+	}
 	
 }

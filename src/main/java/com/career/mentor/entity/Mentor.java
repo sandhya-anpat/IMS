@@ -34,4 +34,7 @@ public class Mentor {
 	
 	@Column(name = "batchCode", columnDefinition = "varchar default false")
 	private String batchCode = "SDE13";
+	
+	@Column(name = "active", columnDefinition = "boolean default true")
+	private Boolean active = true;
 }

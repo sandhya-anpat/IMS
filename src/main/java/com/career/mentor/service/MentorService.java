@@ -20,12 +20,19 @@ public interface MentorService {
 	String updateMentor(MentorUpdateDto mentorUpdateDto);
 
 	String deleteMentor(Long mentorId);
+<<<<<<< HEAD
+	
+	String deleteMentorById(Long mentorId);
+	
+	List<Mentor> getAllActiveMentor();
+=======
 
 	String registerMentor(RegisterMentorDto registerMentorDto);
 
 	String loginMentor(LoginMentorDto loginMentorDto);
 
 	String updateMentorPassword(MentorPasswordUpdate passwordUpdate);
+>>>>>>> 576498f9183fe513d62dc21f3b20d84e491fe487
 		
 
 }
