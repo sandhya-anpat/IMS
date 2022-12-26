@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.career.constants.AppConstants;
 import com.career.dto.ResponseDto;
+import com.career.exceptions.EmailAlreadyExistsException;
+import com.career.exceptions.MentorIncorrectPassword;
+import com.career.exceptions.MentorNotFoundException;
+import com.career.mentor.dto.LoginMentorDto;
+import com.career.mentor.dto.MentorPasswordUpdate;
 import com.career.mentor.dto.MentorUpdateDto;
 import com.career.mentor.dto.RegisterMentorDto;
 import com.career.mentor.entity.Mentor;
@@ -29,8 +34,35 @@ public class MentorController {
 	@Autowired
 	MentorService mentorService;
 	
+	@PostMapping("/login")
+	public ResponseEntity<ResponseDto> loginMentor(@RequestBody LoginMentorDto loginMentorDto) throws MentorNotFoundException,MentorIncorrectPassword{
+		
+		if(AppConstants.MENTOR_LOGIN_FAIL.equals(mentorService.loginMentor(loginMentorDto)))
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_LOGIN_FAIL, HttpStatus.BAD_REQUEST.value(), 
+					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
+		else
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_LOGIN_SUCCESS, HttpStatus.OK.value(), 
+					LocalDateTime.now().toString()), HttpStatus.OK);
+			
+	}
+	
+	@PostMapping("/updatePassword")
+	public ResponseEntity<ResponseDto> updateMentorPassword(@RequestBody MentorPasswordUpdate passwordUpdate){
+		
+		if(AppConstants.MENTOR_PASSWORD_UPDATE_FAIL.equals(mentorService.updateMentorPassword(passwordUpdate)))
+			return new ResponseEntity<> (new ResponseDto(AppConstants.MENTOR_PASSWORD_UPDATE_FAIL, HttpStatus.BAD_REQUEST.value(),
+					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
+		else
+			return new ResponseEntity<> (new ResponseDto(AppConstants.MENTOR_PASSWORD_UPDATE_SUCCESSFUL, HttpStatus.OK.value(),
+					LocalDateTime.now().toString()), HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
 	@PostMapping("/register")
-	public ResponseEntity<ResponseDto> registerMentor(@RequestBody RegisterMentorDto registerMentorDto){
+	public ResponseEntity<ResponseDto> registerMentor(@RequestBody RegisterMentorDto registerMentorDto) throws EmailAlreadyExistsException{
 		
 		if(AppConstants.MENTOR_SAVE_FAIL.equals(mentorService.registerMentor(registerMentorDto)))
 			return new ResponseEntity<> (new ResponseDto(AppConstants.MENTOR_SAVE_FAIL, HttpStatus.BAD_REQUEST.value(),
@@ -61,10 +93,8 @@ public class MentorController {
 			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_UPDATE_FAIL, HttpStatus.BAD_REQUEST.value(),
 					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		else
-			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_UPDATE_SUCCESS, HttpStatus.BAD_REQUEST.value(),
-					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
-		
-
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_UPDATE_SUCCESS, HttpStatus.OK.value(),
+					LocalDateTime.now().toString()), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{mentorId}")

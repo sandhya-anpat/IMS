@@ -18,16 +18,19 @@ import lombok.NoArgsConstructor;
 public class Mentor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long mentorId;
+	private Long id;
 	
 	@NotNull
-	private String mentorName;
+	private String name;
 	
 	@NotNull
-	private String mentorEmail;
+	private String email;
 	
 	@NotNull
 	private String salary;
+	
+	@NotNull
+	private String password;
 	
 	@Column(name = "batchCode", columnDefinition = "varchar default false")
 	private String batchCode = "SDE13";
