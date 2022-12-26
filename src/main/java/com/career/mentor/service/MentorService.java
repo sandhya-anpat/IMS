@@ -20,6 +20,10 @@ public interface MentorService {
 	Mentor updateMentor(MentorUpdateDto mentorUpdateDto);
 
 	String deleteMentor(Long mentorId);
+	
+	String deleteMentorById(Long mentorId);
+	
+	List<Mentor> getAllActiveMentor();
 		
 
 }

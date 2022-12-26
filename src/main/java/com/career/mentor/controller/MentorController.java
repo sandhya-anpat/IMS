@@ -1,5 +1,6 @@
 package com.career.mentor.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.career.constants.AppConstants;
 import com.career.dto.ResponseDto;
 import com.career.mentor.dto.MentorUpdateDto;
 import com.career.mentor.entity.Mentor;
@@ -41,10 +44,36 @@ public class MentorController {
 		 return new ResponseEntity<Mentor>(mentorService.updateMentor(mentorUpdateDto), HttpStatus.OK);
 	}
 	
+	@GetMapping("active")
+	public ResponseEntity<List<Mentor>> getAllActiveMentor(){
+		return new ResponseEntity<>(mentorService.getAllActiveMentor(), HttpStatus.FOUND);
+	} 
+	
+	
 	@DeleteMapping("/{mentorId}")
 	public ResponseEntity<ResponseDto> deleteMentor(@PathVariable Long mentorId){
-		return mentorService.deleteMentor(mentorId);
+		String response = mentorService.deleteMentor(mentorId);
+		if(response.equals(AppConstants.DELETE_SUCCESS)) 
+			return new ResponseEntity<>(
+					new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
+					HttpStatus.OK);
+		
+		return new ResponseEntity<>(
+				new ResponseDto(AppConstants.MENTOR_NOT_FOUND, HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
+				HttpStatus.NOT_FOUND);
 	}
 	
+	@PutMapping("softDeleteMentorById")
+	public ResponseEntity<ResponseDto> deleteMentorById(@RequestParam Long mentorId){
+		String response = mentorService.deleteMentorById(mentorId);
+		if(response.equals(AppConstants.DELETE_SUCCESS))
+			return new ResponseEntity<>(
+					new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
+					HttpStatus.OK);
+		
+		return new ResponseEntity<>(
+				new ResponseDto(AppConstants.MENTOR_NOT_FOUND,HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
+				HttpStatus.OK);
+	}
 	
 }
