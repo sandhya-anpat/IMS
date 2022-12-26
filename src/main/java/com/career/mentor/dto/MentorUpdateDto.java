@@ -23,8 +23,8 @@ public class MentorUpdateDto {
 	@NotNull
 	private String mentorName;
 	
-	@NotNull
-	private String mentorEmail;
+//	@NotNull
+//	private String mentorEmail;
 	
 //	@NotNull
 //	private String salary;

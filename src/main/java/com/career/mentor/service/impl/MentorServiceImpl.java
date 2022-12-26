@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.career.constants.AppConstants;
 import com.career.exceptions.EmailAlreadyExistsException;
+import com.career.exceptions.MentorIncorrectPassword;
+import com.career.exceptions.MentorNotFoundException;
+import com.career.mentor.dto.LoginMentorDto;
+import com.career.mentor.dto.MentorPasswordUpdate;
 import com.career.mentor.dto.MentorUpdateDto;
 import com.career.mentor.dto.RegisterMentorDto;
 import com.career.mentor.entity.Mentor;
@@ -34,6 +36,9 @@ public class MentorServiceImpl implements MentorService   {
 
 	@Override
 	public Mentor getMentorById(Long id) {
+		if(!mentorRepo.existsById(id))
+			throw new MentorNotFoundException();
+		else
 		return mentorRepo.findById(id).get();
 	}
 
@@ -83,6 +88,37 @@ public class MentorServiceImpl implements MentorService   {
 			if(mentorRepo.save(entity)==null)
 				response = AppConstants.MENTOR_SAVE_FAIL;
 		}
+		return response;
+	}
+
+	@Override
+	public String loginMentor(LoginMentorDto loginMentorDto) {
+		List<Mentor> findMentorEmail = mentorRepo.findMentorByEmail(loginMentorDto.getMentorEmail());
+		if(findMentorEmail.size()==0) 
+			throw new MentorNotFoundException();
+		else {
+			if(loginMentorDto.getPassword().equals(findMentorEmail.get(0).getPassword()))
+				response = AppConstants.MENTOR_LOGIN_SUCCESS;
+			else
+				throw new MentorIncorrectPassword();
+				response = AppConstants.MENTOR_LOGIN_FAIL;
+		}
+		
+		return response;
+	}
+
+	@Override
+	public String updateMentorPassword(MentorPasswordUpdate passwordUpdate) {
+		List<Mentor> findMentorEmail = mentorRepo.findMentorByEmail(passwordUpdate.getMentorEmail());
+		if(findMentorEmail.size()==0)
+			throw new MentorNotFoundException();
+		else {
+			Mentor entity = findMentorEmail.get(0);
+			entity.setPassword(passwordUpdate.getPassword());
+			mentorRepo.save(entity);
+			response = AppConstants.MENTOR_PASSWORD_UPDATE_SUCCESSFUL;
+		}
+		
 		return response;
 	}
 	

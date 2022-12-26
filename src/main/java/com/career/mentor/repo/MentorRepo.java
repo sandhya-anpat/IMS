@@ -13,3 +13,4 @@ public interface MentorRepo extends JpaRepository<Mentor, Long> {
 	
 	List<Mentor> findMentorByEmail(String mentorEmail);
 }
+
