@@ -75,17 +75,21 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Student updatePassword(StudentPasswordUpdateDto passwordUpdateDto) {
+	public String updatePassword(StudentPasswordUpdateDto passwordUpdateDto) {
 		List<Student> byEmail = studentRepo.findByEmail(passwordUpdateDto.getEmail());
 		if (byEmail.isEmpty()) {
-			// throw exception StudentNotFoundException
+			throw new StudentNotFoundException();
 		}
 		if (byEmail.size() > 1) {
 			// inconsistent data
+			response = AppConstants.PASSWORD_UPDATE_FAILURE;
 		}
 		byEmail.get(0).setPassword(passwordUpdateDto.getPassword());
 		Student updated = studentRepo.save(byEmail.get(0));
-		return updated;
+		
+		response = AppConstants.PASSWORD_UPDATE_SUCCESS;
+		
+		return response;
 	}
 
 //	@Override
@@ -106,9 +110,22 @@ public class StudentServiceImpl implements StudentService {
 //	}
 
 	@Override
-	public Student updateStudent(StudentUpdateDto studentUpdateDto) {
+	public String updateStudent(StudentUpdateDto studentUpdateDto) {
 		Student entity = mapper.map(studentUpdateDto, Student.class);
-		return studentRepo.save(entity);
+		if(studentRepo.existsById(studentUpdateDto.getId())) {
+			studentRepo.save(entity);
+			if(studentRepo.save(entity) == null) {
+				response = AppConstants.STUDENT_UPDATE_FAILURE;
+			}
+			else {
+				response = AppConstants.STUDENT_UPDATE_FAILURE;
+			}
+		}
+		else {
+			response = AppConstants.STUDENT_NOT_FOUND;
+		}
+		
+		return response;
 	}
 	
 	

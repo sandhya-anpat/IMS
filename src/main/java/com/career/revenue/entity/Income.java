@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,9 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.career.constants.CertificationCategory;
+import com.career.constants.IncomeCategory;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,8 +46,8 @@ public class Income {
 	@NotNull
 	private Long paidFees;
 	
-	@NotNull(message="income category cannot be null")
-	private Long incomeCategory;
+	@Enumerated(EnumType.STRING)
+	private IncomeCategory incomeCategory;
 	
 	@NotNull(message = "transaction id cannot be null")
 	private String transactionId;
@@ -50,8 +55,8 @@ public class Income {
 	@NotNull(message = "courier id cannot be null")
 	private String courierId;
 	
-	@NotNull(message = "certification name cannot be null")
-	private String certificationName;
+	@Enumerated(EnumType.STRING)
+	private CertificationCategory certificationName;
 
 	// audit columns
 	@CreationTimestamp

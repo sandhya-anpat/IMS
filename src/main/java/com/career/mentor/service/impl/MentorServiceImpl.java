@@ -19,16 +19,16 @@ import com.career.mentor.repo.MentorRepo;
 import com.career.mentor.service.MentorService;
 
 @Service
-public class MentorServiceImpl implements MentorService   {
-	
+public class MentorServiceImpl implements MentorService {
+
 	@Autowired
 	MentorRepo mentorRepo;
-	
-	@Autowired	
+
+	@Autowired
 	private ModelMapper mapper;
-	
+
 	private static String response;
-	
+
 	@Override
 	public List<Mentor> getAllMentor() {
 		return mentorRepo.findAll();
@@ -36,56 +36,53 @@ public class MentorServiceImpl implements MentorService   {
 
 	@Override
 	public Mentor getMentorById(Long id) {
-		if(!mentorRepo.existsById(id))
+		if (!mentorRepo.existsById(id))
 			throw new MentorNotFoundException();
 		else
-		return mentorRepo.findById(id).get();
+			return mentorRepo.findById(id).get();
 	}
 
 	@Override
-	public String updateMentor(MentorUpdateDto mentorUpdateDto) {
-		 Mentor entity = mapper.map(mentorUpdateDto, Mentor.class);
+	public String updateMentor(MentorUpdateDto mentorUpdateDto) { // throw MentorNotFoundException()
+		Mentor entity = mapper.map(mentorUpdateDto, Mentor.class);
 //		 return mentorRepo.save(entity);
-		 if(mentorRepo.existsById(mentorUpdateDto.getMentorId())) {
-			 mentorRepo.save(entity);
-			 if(mentorRepo.save(entity)!=null) {
-					response = AppConstants.MENTOR_UPDATE_FAIL;
-				 }
-				 else {
-					 response = AppConstants.MENTOR_UPDATE_SUCCESS;
-				 }
-		 }
-		 else {
-			 response = AppConstants.MENTOR_NOT_FOUND;
-		 }
-		 
-		 return response;
-		
+		if (mentorRepo.existsById(mentorUpdateDto.getMentorId())) {
+			mentorRepo.save(entity);
+			if (mentorRepo.save(entity) != null) {
+				response = AppConstants.MENTOR_UPDATE_FAIL;
+			} else {
+				response = AppConstants.MENTOR_UPDATE_SUCCESS;
+			}
+		} else {
+			response = AppConstants.MENTOR_NOT_FOUND;
+		}
+
+		return response;
+
 	}
 
 	@Override
-	public String deleteMentor(Long mentorId) {
-		if(mentorRepo.existsById(mentorId)) {
+	public String deleteMentor(Long mentorId) { // throw MentorNotFoundException()
+		if (mentorRepo.existsById(mentorId)) {
 			mentorRepo.deleteById(mentorId);
 			response = AppConstants.DELETE_SUCCESS;
-		}
-		else
+		} else
 			response = AppConstants.DELETE_FAILURE;
 		return response;
 	}
 
 	@Override
 	public String registerMentor(RegisterMentorDto registerMentorDto) {
-		 
+
 		List<Mentor> mentorByEmail = mentorRepo.findMentorByEmail(registerMentorDto.getMentorEmail());
-				
+
 		response = AppConstants.MENTOR_SAVE_SUCCESS;
-		
-		if(mentorByEmail.size()>0) 
+
+		if (mentorByEmail.size() > 0)
 			throw new EmailAlreadyExistsException();
 		else {
 			Mentor entity = mapper.map(registerMentorDto, Mentor.class);
-			if(mentorRepo.save(entity)==null)
+			if (mentorRepo.save(entity) == null)
 				response = AppConstants.MENTOR_SAVE_FAIL;
 		}
 		return response;
@@ -94,34 +91,33 @@ public class MentorServiceImpl implements MentorService   {
 	@Override
 	public String loginMentor(LoginMentorDto loginMentorDto) {
 		List<Mentor> findMentorEmail = mentorRepo.findMentorByEmail(loginMentorDto.getMentorEmail());
-		if(findMentorEmail.size()==0) 
+		if (findMentorEmail.size() == 0)
 			throw new MentorNotFoundException();
 		else {
-			if(loginMentorDto.getPassword().equals(findMentorEmail.get(0).getPassword()))
-				response = AppConstants.MENTOR_LOGIN_SUCCESS;
-			else
+			if (!loginMentorDto.getPassword().equals(findMentorEmail.get(0).getPassword()))
 				throw new MentorIncorrectPassword();
-				response = AppConstants.MENTOR_LOGIN_FAIL;
+			else
+				response = AppConstants.MENTOR_LOGIN_SUCCESS;
+//				response = AppConstants.MENTOR_LOGIN_FAIL;
 		}
-		
 		return response;
 	}
 
 	@Override
 	public String updateMentorPassword(MentorPasswordUpdate passwordUpdate) {
 		List<Mentor> findMentorEmail = mentorRepo.findMentorByEmail(passwordUpdate.getMentorEmail());
-		if(findMentorEmail.size()==0)
+		if (findMentorEmail.size() == 0)
 			throw new MentorNotFoundException();
 		else {
 			Mentor entity = findMentorEmail.get(0);
 			entity.setPassword(passwordUpdate.getPassword());
-			mentorRepo.save(entity);
-			response = AppConstants.MENTOR_PASSWORD_UPDATE_SUCCESSFUL;
+			if (mentorRepo.save(entity) == null)
+				response = AppConstants.MENTOR_PASSWORD_UPDATE_FAIL;
+			else
+				response = AppConstants.MENTOR_PASSWORD_UPDATE_SUCCESSFUL;
 		}
-		
+
 		return response;
 	}
-	
-	
 
 }

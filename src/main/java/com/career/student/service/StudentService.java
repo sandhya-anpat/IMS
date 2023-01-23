@@ -17,9 +17,9 @@ public interface StudentService {
 
 	String saveStudent(StudentRegistrationDto registrationDto) throws EmailAlreadyExistsException;
 
-	Student updatePassword(StudentPasswordUpdateDto passwordUpdateDto);
+	String updatePassword(StudentPasswordUpdateDto passwordUpdateDto);
 
-	Student updateStudent(StudentUpdateDto studentUpdateDto);
+	String updateStudent(StudentUpdateDto studentUpdateDto);
 
 	String deleteStudent(Long id);
 
