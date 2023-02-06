@@ -43,18 +43,18 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
-	public String updateMentor(MentorUpdateDto mentorUpdateDto) { // throw MentorNotFoundException()
+	public String updateMentor(MentorUpdateDto mentorUpdateDto) throws MentorNotFoundException { // throw MentorNotFoundException()
 		Mentor entity = mapper.map(mentorUpdateDto, Mentor.class);
 //		 return mentorRepo.save(entity);
-		if (mentorRepo.existsById(mentorUpdateDto.getMentorId())) {
-			mentorRepo.save(entity);
+		if (!mentorRepo.existsById(mentorUpdateDto.getMentorId())) {
+			throw new MentorNotFoundException();
+			
+		} else {
 			if (mentorRepo.save(entity) != null) {
 				response = AppConstants.MENTOR_UPDATE_FAIL;
 			} else {
 				response = AppConstants.MENTOR_UPDATE_SUCCESS;
 			}
-		} else {
-			response = AppConstants.MENTOR_NOT_FOUND;
 		}
 
 		return response;
@@ -62,12 +62,13 @@ public class MentorServiceImpl implements MentorService {
 	}
 
 	@Override
-	public String deleteMentor(Long mentorId) { // throw MentorNotFoundException()
-		if (mentorRepo.existsById(mentorId)) {
+	public String deleteMentor(Long mentorId) throws MentorNotFoundException { // throw MentorNotFoundException()
+		if (!mentorRepo.existsById(mentorId)) {
+			throw new MentorNotFoundException();
+		} else {
 			mentorRepo.deleteById(mentorId);
 			response = AppConstants.DELETE_SUCCESS;
-		} else
-			response = AppConstants.DELETE_FAILURE;
+		}
 		return response;
 	}
 

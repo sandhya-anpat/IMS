@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -26,9 +27,14 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@GenericGenerator(name = "studentId", strategy = "com.career.student.generator.StudentIdGenerator")
+	@GeneratedValue(generator = "studentId")
+	private String studentId;
+	
 	@NotNull
 	@Size(min = 3, message = "Firstname should contain atleast 3 characters")
 	private String firstName;
+		
 	
 	@NotNull
 	@Size(min = 3, message = "Lastname should contain atleast 3 characters")
@@ -58,6 +64,18 @@ public class Student {
 	
 	@NotNull
 	private String education;
+	
+	@NotNull
+	private String gender;
+	
+	@NotNull
+	private String address;
+	
+	@NotNull
+	private LocalDateTime dob;
+	
+	@NotNull
+	private String course;
 	
 	@NotNull
 	private String passingYear;

@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,10 @@ public class Mentor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@GenericGenerator(name = "mentorId", strategy = "com.career.student.generator")
+	@GeneratedValue(generator = "mentorId")
+	private String mentorId;
 	
 	@NotNull
 	private String name;

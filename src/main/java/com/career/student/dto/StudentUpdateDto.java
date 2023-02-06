@@ -55,6 +55,18 @@ public class StudentUpdateDto {
 	@NotNull
 	private String passingYear;
 	
+	@NotNull
+	private String gender;
+	
+	@NotNull
+	private String address;
+	
+	@NotNull
+	private LocalDateTime dob;
+	
+	@NotNull
+	private String course;
+	
 //	private String mentor;
 
 //	@Column(name = "isMentorOpted", columnDefinition = "boolean default false")
