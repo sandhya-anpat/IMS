@@ -1,5 +1,6 @@
 package com.career.student.controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class StudentController {
 	@PostMapping("register")
 	public ResponseEntity<ResponseDto> saveStudent(@RequestBody @Valid StudentRegistrationDto registrationDto)
 			throws EmailAlreadyExistsException {
-		if (studentService.saveStudent(registrationDto).equals(AppConstants.SAVE_FAIURE))
+		if (AppConstants.SAVE_FAIURE.equals(studentService.saveStudent(registrationDto)))
 			return new ResponseEntity<>(new ResponseDto(AppConstants.SAVE_FAIURE, HttpStatus.BAD_REQUEST.value(),
 					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		return new ResponseEntity<>(
@@ -54,7 +55,7 @@ public class StudentController {
 	@PostMapping("login")
 	public ResponseEntity<ResponseDto> loginStudent(@RequestBody @Valid LoginDto loginDto)
 			throws StudentNotFoundException,IncorrectPasswordException{
-		if (studentService.loginStudent(loginDto).equals(AppConstants.LOGIN_SUCCESS))
+		if (AppConstants.LOGIN_SUCCESS.equals(studentService.loginStudent(loginDto)))
 			return new ResponseEntity<>(new ResponseDto(AppConstants.LOGIN_SUCCESS, HttpStatus.OK.value(),
 					LocalDateTime.now().toString()), HttpStatus.OK);
 		return new ResponseEntity<>(
@@ -65,15 +66,29 @@ public class StudentController {
 	
 
 	@PatchMapping("updatePassword")
-	public ResponseEntity<ResponseDto> updatePassword(@RequestBody StudentPasswordUpdateDto passwordUpdateDto) {
-		studentService.updatePassword(passwordUpdateDto);
-		return new ResponseEntity<>(new ResponseDto(AppConstants.PASSWORD_UPDATE_SUCCESS, HttpStatus.OK.value(),
-				LocalDateTime.now().toString()), HttpStatus.OK);
+	public ResponseEntity<ResponseDto> updatePassword(@RequestBody StudentPasswordUpdateDto passwordUpdateDto)
+		throws StudentNotFoundException {
+	if(AppConstants.PASSWORD_UPDATE_FAILURE.equals(studentService.updatePassword(passwordUpdateDto)))
+		return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.PASSWORD_UPDATE_FAILURE, HttpStatus.BAD_REQUEST.value(), 
+				LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
+	return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.PASSWORD_UPDATE_SUCCESS, HttpStatus.OK.value(), LocalDate.now().toString()), HttpStatus.OK);
+		
 	}
 
 	@PutMapping("updateStudent")
-	public ResponseEntity<Student> updateStudent(@RequestBody StudentUpdateDto studentUpdateDto) {
-		return new ResponseEntity<>(studentService.updateStudent(studentUpdateDto), HttpStatus.OK);
+	public ResponseEntity<ResponseDto> updateStudent(@RequestBody StudentUpdateDto studentUpdateDto) {
+		if(AppConstants.ACTIVE_STUDENTS_NOT_FOUND.equals(studentService.updateStudent(studentUpdateDto))) {
+			return new ResponseEntity<>(new ResponseDto(AppConstants.ACTIVE_STUDENTS_NOT_FOUND, HttpStatus.BAD_REQUEST.value(),
+					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
+			}
+		else if(AppConstants.STUDENT_UPDATE_FAILURE.equals(studentService.updateStudent(studentUpdateDto))) {
+			return new ResponseEntity<>(new ResponseDto(AppConstants.ACTIVE_STUDENTS_NOT_FOUND, HttpStatus.BAD_REQUEST.value(),
+					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
+		}
+		else {
+			return new ResponseEntity<>(new ResponseDto(AppConstants.STUDENT_UPDATE_SUCCESS, HttpStatus.OK.value(),
+					LocalDateTime.now().toString()), HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("all")

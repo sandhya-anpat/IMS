@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.career.constants.AppConstants;
+import com.career.constants.IncomeCategory;
 import com.career.revenue.dto.PaymentDto;
 import com.career.revenue.entity.Income;
 import com.career.revenue.repo.IncomeRepo;
@@ -24,7 +25,7 @@ public class IncomeServiceImpl implements IncomeService {
 	@Override
 	public String saveIncomeDetails(PaymentDto paymentDto) {
 		Income income = mapper.map(paymentDto, Income.class);
-		if(AppConstants.MAIN_FEE.equals(paymentDto.getIncomeCategory())) {
+		if(IncomeCategory.MAIN_FEES == (paymentDto.getIncomeCategory())) {
 			if(income.getTotalFees().equals(income.getPaidFees()))
 				response = AppConstants.FEES_ALREADY_PAID;
 			else {
