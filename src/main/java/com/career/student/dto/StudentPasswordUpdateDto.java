@@ -15,7 +15,10 @@ public class StudentPasswordUpdateDto {
 	private String email;
 	
 	@NotNull
-	private String password;
+	private String currentPassword;
+	
+	@NotNull
+	private String newPassword;
 
-
+	
 }

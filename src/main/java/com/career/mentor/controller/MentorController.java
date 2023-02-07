@@ -30,81 +30,71 @@ import com.career.mentor.service.MentorService;
 @RestController
 @RequestMapping("mentor")
 public class MentorController {
-	
+
 	@Autowired
 	MentorService mentorService;
-	
+
 	@PostMapping("/login")
-	public ResponseEntity<ResponseDto> loginMentor(@RequestBody LoginMentorDto loginMentorDto) throws MentorNotFoundException,MentorIncorrectPassword{
-		
-		if(AppConstants.MENTOR_LOGIN_FAIL.equals(mentorService.loginMentor(loginMentorDto)))
-			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_LOGIN_FAIL, HttpStatus.BAD_REQUEST.value(), 
+	public ResponseEntity<ResponseDto> loginMentor(@RequestBody LoginMentorDto loginMentorDto)
+			throws MentorNotFoundException, MentorIncorrectPassword {
+		if (AppConstants.MENTOR_LOGIN_FAIL.equals(mentorService.loginMentor(loginMentorDto)))
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_LOGIN_FAIL, HttpStatus.BAD_REQUEST.value(),
 					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		else
-			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_LOGIN_SUCCESS, HttpStatus.OK.value(), 
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_LOGIN_SUCCESS, HttpStatus.OK.value(),
 					LocalDateTime.now().toString()), HttpStatus.OK);
-			
 	}
-	
+
 	@PostMapping("/updatePassword")
-	public ResponseEntity<ResponseDto> updateMentorPassword(@RequestBody MentorPasswordUpdate passwordUpdate){
-		
-		if(AppConstants.MENTOR_PASSWORD_UPDATE_FAIL.equals(mentorService.updateMentorPassword(passwordUpdate)))
-			return new ResponseEntity<> (new ResponseDto(AppConstants.MENTOR_PASSWORD_UPDATE_FAIL, HttpStatus.BAD_REQUEST.value(),
-					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
+	public ResponseEntity<ResponseDto> updateMentorPassword(@RequestBody MentorPasswordUpdate passwordUpdate) {
+		if (AppConstants.MENTOR_PASSWORD_UPDATE_FAIL.equals(mentorService.updateMentorPassword(passwordUpdate)))
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_PASSWORD_UPDATE_FAIL,
+					HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		else
-			return new ResponseEntity<> (new ResponseDto(AppConstants.MENTOR_PASSWORD_UPDATE_SUCCESSFUL, HttpStatus.OK.value(),
-					LocalDateTime.now().toString()), HttpStatus.OK);
-		
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_PASSWORD_UPDATE_SUCCESSFUL,
+					HttpStatus.OK.value(), LocalDateTime.now().toString()), HttpStatus.OK);
 	}
-	
-	
-	
-	
+
 	@PostMapping("/register")
-	public ResponseEntity<ResponseDto> registerMentor(@RequestBody RegisterMentorDto registerMentorDto) throws EmailAlreadyExistsException{
-		
-		if(AppConstants.MENTOR_SAVE_FAIL.equals(mentorService.registerMentor(registerMentorDto)))
-			return new ResponseEntity<> (new ResponseDto(AppConstants.MENTOR_SAVE_FAIL, HttpStatus.BAD_REQUEST.value(),
+	public ResponseEntity<ResponseDto> registerMentor(@RequestBody RegisterMentorDto registerMentorDto)
+			throws EmailAlreadyExistsException {
+		if (AppConstants.MENTOR_SAVE_FAIL.equals(mentorService.registerMentor(registerMentorDto)))
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_SAVE_FAIL, HttpStatus.BAD_REQUEST.value(),
 					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		else
-			return new ResponseEntity<> (new ResponseDto(AppConstants.MENTOR_SAVE_SUCCESS, HttpStatus.OK.value(),
+			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_SAVE_SUCCESS, HttpStatus.OK.value(),
 					LocalDateTime.now().toString()), HttpStatus.OK);
-		
 	}
-	
+
 	@GetMapping("/all")
-	public ResponseEntity<List<Mentor>> getAllMentor(){
+	public ResponseEntity<List<Mentor>> getAllMentor() {
 		return new ResponseEntity<List<Mentor>>(mentorService.getAllMentor(), HttpStatus.FOUND);
-		
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Mentor> getMentorById(@PathVariable Long id){
+	public ResponseEntity<Mentor> getMentorById(@PathVariable Long id) {
 		return new ResponseEntity<Mentor>(mentorService.getMentorById(id), HttpStatus.FOUND);
 	}
-	
+
 	@PutMapping("/updateMentor")
-	public ResponseEntity<ResponseDto> updateMentor(@RequestBody MentorUpdateDto mentorUpdateDto){
-		if(AppConstants.MENTOR_NOT_FOUND.equals(mentorService.updateMentor(mentorUpdateDto)))
-			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_NOT_FOUND, HttpStatus.NOT_FOUND.value(),
-					LocalDateTime.now().toString()), HttpStatus.NOT_FOUND);
-		else if(AppConstants.MENTOR_UPDATE_FAIL.equals(mentorService.updateMentor(mentorUpdateDto)))
+	public ResponseEntity<ResponseDto> updateMentor(@RequestBody MentorUpdateDto mentorUpdateDto)
+			throws MentorNotFoundException {
+		if (AppConstants.MENTOR_UPDATE_FAIL.equals(mentorService.updateMentor(mentorUpdateDto)))
 			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_UPDATE_FAIL, HttpStatus.BAD_REQUEST.value(),
 					LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		else
 			return new ResponseEntity<>(new ResponseDto(AppConstants.MENTOR_UPDATE_SUCCESS, HttpStatus.OK.value(),
 					LocalDateTime.now().toString()), HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/{mentorId}")
-	public ResponseEntity<ResponseDto> deleteMentor(@PathVariable Long mentorId){
-		if(AppConstants.DELETE_FAILURE.equals(mentorService.deleteMentor(mentorId))) 
-				return new ResponseEntity<>(new ResponseDto(AppConstants.DELETE_FAILURE, HttpStatus.NOT_FOUND.value(),
-						LocalDateTime.now().toString()),HttpStatus.NOT_FOUND);
-		return new ResponseEntity<>(new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(),
-						LocalDateTime.now().toString()),HttpStatus.OK);
+	public ResponseEntity<ResponseDto> deleteMentor(@PathVariable Long mentorId) throws MentorNotFoundException {
+//		if(AppConstants.DELETE_FAILURE.equals(mentorService.deleteMentor(mentorId))) 
+//				return new ResponseEntity<>(new ResponseDto(AppConstants.DELETE_FAILURE, HttpStatus.NOT_FOUND.value(),
+//						LocalDateTime.now().toString()),HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(
+				new ResponseDto(AppConstants.DELETE_SUCCESS, HttpStatus.OK.value(), LocalDateTime.now().toString()),
+				HttpStatus.OK);
 	}
-	
-	
+
 }
