@@ -11,7 +11,7 @@ import com.career.constants.AppConstants;
 import com.career.dto.ResponseDto;
 import com.career.mentor.controller.MentorController;
 import com.career.student.controller.StudentController;
-import com.career.student.service.impl.InvalidPasswordException;
+import com.career.exceptions.InvalidPasswordException;
 
 @RestControllerAdvice(basePackageClasses = {StudentController.class, MentorController.class})
 public class GlobalExceptionHandler {

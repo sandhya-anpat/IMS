@@ -1,4 +1,4 @@
-package com.career.student.service.impl;
+package com.career.exceptions;
 
 public class InvalidPasswordException extends RuntimeException {
 
