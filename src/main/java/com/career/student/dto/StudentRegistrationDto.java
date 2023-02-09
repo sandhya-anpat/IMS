@@ -1,5 +1,7 @@
 package com.career.student.dto;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -31,6 +33,18 @@ public class StudentRegistrationDto {
 	
 	@NotNull(message = "Passing Year cannot be null")
 	private String passingYear;
+	
+	@NotNull
+	private String gender;
+	
+	@NotNull
+	private String address;
+	
+	@NotNull
+	private LocalDateTime dob;
+	
+	@NotNull
+	private String course;
 	
 //	@NotNull(message = "Base Package cannot be null")
 //	private Long basePackage;

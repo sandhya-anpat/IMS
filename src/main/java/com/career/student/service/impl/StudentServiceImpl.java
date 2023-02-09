@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.career.constants.AppConstants;
 import com.career.exceptions.EmailAlreadyExistsException;
+import com.career.exceptions.InconsistentDataException;
 import com.career.exceptions.IncorrectPasswordException;
 import com.career.exceptions.StudentNotFoundException;
 import com.career.student.dto.LoginDto;
@@ -26,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	private static String response;
 
 	@Override
@@ -41,29 +42,27 @@ public class StudentServiceImpl implements StudentService {
 		}
 		return response;
 	}
-	
+
 	@Override
-	public String loginStudent(LoginDto loginDto) throws StudentNotFoundException{
+	public String loginStudent(LoginDto loginDto) throws StudentNotFoundException {
 		List<Student> findByEmail = studentRepo.findByEmail(loginDto.getEmail());
-		if(findByEmail.size()==0)
+		if (findByEmail.size() == 0)
 //			response = AppConstants.NOT_FOUND;
 			throw new StudentNotFoundException();
-		else if(findByEmail.size()==1)
-			if(!loginDto.getPassword().equals(findByEmail.get(0).getPassword()))
+		else if (findByEmail.size() == 1)
+			if (!loginDto.getPassword().equals(findByEmail.get(0).getPassword()))
 //				response = AppConstants.INCORRECT_PASSWORD;
 				throw new IncorrectPasswordException();
 			else
 				response = AppConstants.LOGIN_SUCCESS;
 		return response;
 	}
-	
-	
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public String deleteStudentById(Long id) {
-		
-		if(!studentRepo.existsById(id))
+
+		if (!studentRepo.existsById(id))
 			throw new StudentNotFoundException();
 		else {
 			Student byId = studentRepo.getById(id);
@@ -81,14 +80,21 @@ public class StudentServiceImpl implements StudentService {
 			throw new StudentNotFoundException();
 		}
 		if (byEmail.size() > 1) {
-			// inconsistent data
-			response = AppConstants.PASSWORD_UPDATE_FAILURE;
+			throw new InconsistentDataException();
 		}
-		byEmail.get(0).setPassword(passwordUpdateDto.getPassword());
-		Student updated = studentRepo.save(byEmail.get(0));
+		Student student = byEmail.get(0);
 		
-		response = AppConstants.PASSWORD_UPDATE_SUCCESS;
-		
+		if (!student.getPassword().equals(passwordUpdateDto.getCurrentPassword())) {
+			throw new InvalidPasswordException();
+		} else {
+			student.setPassword(passwordUpdateDto.getNewPassword());
+		}
+
+		if (studentRepo.save(byEmail.get(0)) == null)
+			response = AppConstants.PASSWORD_UPDATE_FAILURE;
+		else
+			response = AppConstants.PASSWORD_UPDATE_SUCCESS;
+
 		return response;
 	}
 
@@ -112,23 +118,19 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public String updateStudent(StudentUpdateDto studentUpdateDto) {
 		Student entity = mapper.map(studentUpdateDto, Student.class);
-		if(studentRepo.existsById(studentUpdateDto.getId())) {
+		if (studentRepo.existsById(studentUpdateDto.getId())) {
 			studentRepo.save(entity);
-			if(studentRepo.save(entity) == null) {
+			if (studentRepo.save(entity) == null) {
+				response = AppConstants.STUDENT_UPDATE_FAILURE;
+			} else {
 				response = AppConstants.STUDENT_UPDATE_FAILURE;
 			}
-			else {
-				response = AppConstants.STUDENT_UPDATE_FAILURE;
-			}
-		}
-		else {
+		} else {
 			response = AppConstants.STUDENT_NOT_FOUND;
 		}
-		
+
 		return response;
 	}
-	
-	
 
 	@Override
 	public String deleteStudent(Long id) {

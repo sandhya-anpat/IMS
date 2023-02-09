@@ -43,10 +43,6 @@ public class AppConstants {
 	public static final String MENTOR_LOGIN_SUCCESS = "MENTOR LOGIN SUCCESS";
 	public static final String MENTOR_PASSWORD_UPDATE_SUCCESSFUL = "MENTOR PASSWORD UPDATE SUCCESSFUL";
 	public static final String MENTOR_PASSWORD_UPDATE_FAIL = "MENTOR PASSWORD UPDATE FAIL";
-	
-
-
-
-	
+	public static final String INCONSISTENT_DATA = "INCONSISTENT DATA FOUND";
 
 }
