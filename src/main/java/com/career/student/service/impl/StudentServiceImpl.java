@@ -10,6 +10,7 @@ import com.career.constants.AppConstants;
 import com.career.exceptions.EmailAlreadyExistsException;
 import com.career.exceptions.InconsistentDataException;
 import com.career.exceptions.IncorrectPasswordException;
+import com.career.exceptions.InvalidPasswordException;
 import com.career.exceptions.StudentNotFoundException;
 import com.career.student.dto.LoginDto;
 import com.career.student.dto.StudentPasswordUpdateDto;
@@ -35,7 +36,11 @@ public class StudentServiceImpl implements StudentService {
 		if (emailAlreadyExists(registrationDto.getEmail()).equals(AppConstants.EMAIL_ALREADY_EXISTS))
 			throw new EmailAlreadyExistsException();
 		else {
-			if (studentRepo.save(mapper.map(registrationDto, Student.class)) != null)
+			Student savedStudent = studentRepo.save(mapper.map(registrationDto, Student.class));
+			Long id = savedStudent.getId();
+			savedStudent.setStudentId("CI"+String.format("%04d", id));
+			
+			if (studentRepo.save(savedStudent) != null)
 				response = AppConstants.SAVE_SUCCESS;
 			else
 				response = AppConstants.SAVE_FAIURE;

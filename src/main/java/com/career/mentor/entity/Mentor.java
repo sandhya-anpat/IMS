@@ -22,7 +22,7 @@ public class Mentor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@GenericGenerator(name = "mentorId", strategy = "com.career.student.generator")
+	@GenericGenerator(name = "mentorId", strategy = "com.career.mentor.generator.MentorGenerator")
 	@GeneratedValue(generator = "mentorId")
 	private String mentorId;
 	

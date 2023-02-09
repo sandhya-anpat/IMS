@@ -82,8 +82,13 @@ public class MentorServiceImpl implements MentorService {
 		if (mentorByEmail.size() > 0)
 			throw new EmailAlreadyExistsException();
 		else {
-			Mentor entity = mapper.map(registerMentorDto, Mentor.class);
-			if (mentorRepo.save(entity) == null)
+			Mentor savedMentor = mentorRepo.save(mapper.map(registerMentorDto, Mentor.class));
+			Long id = savedMentor.getId();
+			
+			savedMentor.setMentorId("CIMN"+String.format("%02d", id));			
+			
+			if (mentorRepo.save(savedMentor) == null)
+				
 				response = AppConstants.MENTOR_SAVE_FAIL;
 		}
 		return response;

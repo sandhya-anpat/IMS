@@ -16,7 +16,7 @@ public class MentorGenerator implements IdentifierGenerator {
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
 		final String prefix = "CIMN";
 		final String query = "select count(id) from mentor";
-		Connection connection = session.connection();
+		Connection connection = session.connection(); //????
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
