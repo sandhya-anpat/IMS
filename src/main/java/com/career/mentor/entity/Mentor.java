@@ -1,5 +1,7 @@
 package com.career.mentor.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +29,25 @@ public class Mentor {
 	private String mentorId;
 	
 	@NotNull
-	private String name;
+	private String firstName;
+	
+	@NotNull
+	private String lastName;
+	
+	@NotNull
+	private LocalDate dob;
+	
+	@NotNull
+	private LocalDate dateOfJoining;
+	
+	@NotNull
+	private String address;
+	
+	@NotNull
+	private String experience;
+	
+	@NotNull
+	private String qualification;
 	
 	@NotNull
 	private String email;
@@ -37,6 +57,8 @@ public class Mentor {
 	
 	@NotNull
 	private String password;
+	
+	private String tempPassword;
 	
 	@Column(name = "batchCode", columnDefinition = "varchar default false")
 	private String batchCode = "SDE13";

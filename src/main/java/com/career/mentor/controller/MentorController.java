@@ -68,12 +68,12 @@ public class MentorController {
 
 	@GetMapping("/all")
 	public ResponseEntity<List<Mentor>> getAllMentor() {
-		return new ResponseEntity<List<Mentor>>(mentorService.getAllMentor(), HttpStatus.FOUND);
+		return new ResponseEntity<List<Mentor>>(mentorService.getAllMentor(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Mentor> getMentorById(@PathVariable Long id) {
-		return new ResponseEntity<Mentor>(mentorService.getMentorById(id), HttpStatus.FOUND);
+		return new ResponseEntity<Mentor>(mentorService.getMentorById(id), HttpStatus.OK);
 	}
 
 	@PutMapping("/updateMentor")

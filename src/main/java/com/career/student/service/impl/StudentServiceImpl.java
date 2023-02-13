@@ -77,6 +77,13 @@ public class StudentServiceImpl implements StudentService {
 		}
 		return response;
 	}
+	
+//	public void softDelete(Long id) {
+//		Student student  = studentRepo.findById(id).orElseThrow(() -> new StudentNotFoundException());
+//		
+//		student.setActive(false);
+//		
+//	}
 
 	@Override
 	public String updatePassword(StudentPasswordUpdateDto passwordUpdateDto) {

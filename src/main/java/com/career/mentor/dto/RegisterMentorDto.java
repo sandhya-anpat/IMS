@@ -1,5 +1,7 @@
 package com.career.mentor.dto;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +18,25 @@ public class RegisterMentorDto {
 	private Long mentorId;
 	
 	@NotNull
-	private String mentorName;
+	private String firstName;
+	
+	@NotNull
+	private String lastName;
+	
+	@NotNull
+	private LocalDate dob;
+	
+	@NotNull
+	private LocalDate dateOfJoining;
+	
+	@NotNull
+	private String address;
+	
+	@NotNull
+	private String experience;
+	
+	@NotNull
+	private String qualification;
 	
 	@NotNull
 	private String mentorEmail;

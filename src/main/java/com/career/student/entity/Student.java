@@ -45,6 +45,8 @@ public class Student {
 	
 	private String password;
 	
+	private String tempPassword;
+	
 	@Size(min = 10, max = 10, message = "Mobile number should contain 10 digits only")
 	private String mobile;
 	

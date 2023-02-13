@@ -1,5 +1,6 @@
 package com.career.student.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
@@ -37,11 +38,13 @@ public class StudentRegistrationDto {
 	@NotNull
 	private String gender;
 	
+//	private String tempPassword;
+//	
 	@NotNull
 	private String address;
 	
 	@NotNull
-	private LocalDateTime dob;
+	private LocalDate dob;
 	
 	@NotNull
 	private String course;

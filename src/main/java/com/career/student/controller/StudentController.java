@@ -93,17 +93,17 @@ public class StudentController {
 
 	@GetMapping("all")
 	public ResponseEntity<List<Student>> getAllStudents() {
-		return new ResponseEntity<List<Student>>(studentService.getAllStudents(), HttpStatus.FOUND);
+		return new ResponseEntity<List<Student>>(studentService.getAllStudents(), HttpStatus.OK);
 	}
 
 	@GetMapping("active")
 	public ResponseEntity<List<Student>> getAllActiveStudents() {
-		return new ResponseEntity<>(studentService.getAllActiveStudents(), HttpStatus.FOUND);
+		return new ResponseEntity<>(studentService.getAllActiveStudents(), HttpStatus.OK);
 	}
 
 	@GetMapping("{id}")
 	public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
-		return new ResponseEntity<Student>(studentService.getStudentById(id), HttpStatus.FOUND);
+		return new ResponseEntity<Student>(studentService.getStudentById(id), HttpStatus.OK);
 	}
 
 	@DeleteMapping("{id}")
@@ -118,7 +118,7 @@ public class StudentController {
 				HttpStatus.NOT_FOUND);
 	}
 	
-	@PutMapping("/softDeleteStudentById/{id}")
+	@DeleteMapping("/softDeleteStudentById/{id}")
 	public ResponseEntity<ResponseDto> deleteStudentById(@RequestParam Long id){
 		if(AppConstants.DELETE_SUCCESS.equals(studentService.deleteStudentById(id)))
 				return new ResponseEntity<>(
