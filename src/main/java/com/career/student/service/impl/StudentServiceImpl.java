@@ -38,8 +38,8 @@ public class StudentServiceImpl implements StudentService {
 		else {
 			Student savedStudent = studentRepo.save(mapper.map(registrationDto, Student.class));
 			Long id = savedStudent.getId();
-			savedStudent.setStudentId("CI"+String.format("%04d", id));
-			
+			savedStudent.setStudentId("CI" + String.format("%04d", id));
+
 			if (studentRepo.save(savedStudent) != null)
 				response = AppConstants.SAVE_SUCCESS;
 			else
@@ -71,13 +71,17 @@ public class StudentServiceImpl implements StudentService {
 			throw new StudentNotFoundException();
 		else {
 			Student byId = studentRepo.getById(id);
-			byId.setActive(false);
-			studentRepo.save(byId);
-			response = AppConstants.DELETE_SUCCESS;
+			if (!byId.isActive()) {
+				throw new StudentNotFoundException();
+			} else {
+				byId.setActive(false);
+				studentRepo.save(byId);
+				response = AppConstants.DELETE_SUCCESS;
+			}
 		}
 		return response;
 	}
-	
+
 //	public void softDelete(Long id) {
 //		Student student  = studentRepo.findById(id).orElseThrow(() -> new StudentNotFoundException());
 //		
@@ -95,7 +99,7 @@ public class StudentServiceImpl implements StudentService {
 			throw new InconsistentDataException();
 		}
 		Student student = byEmail.get(0);
-		
+
 		if (!student.getPassword().equals(passwordUpdateDto.getCurrentPassword())) {
 			throw new InvalidPasswordException();
 		} else {
