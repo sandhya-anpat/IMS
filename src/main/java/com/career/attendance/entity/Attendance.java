@@ -1,5 +1,6 @@
-package com.career.revenue.entity;
+package com.career.attendance.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -15,47 +16,42 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.career.constants.Category;
+import com.career.mentor.entity.Mentor;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Expences {
+@Data
+public class Attendance {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long expenceId;
-	
-	@CreationTimestamp
-	private LocalDateTime createdOn;
-	
-	@NotNull
-	private Long mentorId;
-	
-	@NotNull
-	private String remarks;
-	
-	@NotNull
-	private Long amount;
-	
-	@Enumerated(EnumType.STRING)
-	private Category category;
-	
-	@UpdateTimestamp
-	private LocalDateTime updatedOn;
-	
-	@NotNull
-	private String createdBy;
-	
-	@NotNull
-	private String updatedBy;
-	
-	@Column(name = "active", columnDefinition = "boolean default true")
-	private boolean active=true;
+	private Long id;
 
+	@NotNull
+	private String name;
+	
+	@NotNull
+	private String joiningTime;
+	
+	@NotNull
+	private String leavingTime;
+	
+	@NotNull
+	private String duration;
+	
+	@NotNull
+	private String sessionName;
+	                  
+	@NotNull
+	private String date;
+	
+	@NotNull
+	private String fileName;
+	
 }
-

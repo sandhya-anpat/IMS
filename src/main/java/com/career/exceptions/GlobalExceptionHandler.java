@@ -2,6 +2,7 @@ package com.career.exceptions;
 
 import java.time.LocalDateTime;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -49,6 +50,12 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(InvalidPasswordException.class)
 	public ResponseEntity<ResponseDto> invalidPasswordExceptionHandler(){
 		return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.INCORRECT_PASSWORD, 
+				HttpStatus.BAD_REQUEST.value(),LocalDateTime.now().toString()),HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(FileUploadException.class)
+	public ResponseEntity<ResponseDto> fileUploadExceptionHandler(){
+		return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.ATTENDANCE_UPLOAD_FAILURE, 
 				HttpStatus.BAD_REQUEST.value(),LocalDateTime.now().toString()),HttpStatus.BAD_REQUEST);
 	}
 }
