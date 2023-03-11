@@ -21,8 +21,6 @@ public class MentorSalaryDto {
 	private LocalDateTime createdOn;
 	@NotNull
 	private Long amount;
-	@NotNull
-	private Long expenceId;
 	
 	
 }

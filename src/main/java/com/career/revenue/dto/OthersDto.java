@@ -21,6 +21,5 @@ public class OthersDto {
 	private Long amount;
 	@NotNull
 	private String remarks;
-	@NotNull
-	private Long expenceId;
+
 }

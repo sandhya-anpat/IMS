@@ -56,6 +56,12 @@ public class Mentor {
 	private String salary;
 	
 	@NotNull
+	private String gender;
+	
+	@NotNull
+	private Long contactNo;
+	
+	@NotNull
 	private String password;
 	
 	private String tempPassword;

@@ -44,6 +44,12 @@ public class RegisterMentorDto {
 	@NotNull
 	private String password;
 	
+	@NotNull
+	private String gender;
+	
+	@NotNull
+	private Long contactNo;
+	
 	
 	@Column(name = "batchCode", columnDefinition = "varchar default false")
 	private String batchCode = "SDE13";

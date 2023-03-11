@@ -14,13 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RentDto {
-	
-	
+
 	@CreationTimestamp
 	private LocalDateTime createdOn;
+	
 	@NotNull
 	private Long amount;
-	@NotNull
-	private Long expenceId;
-
 }

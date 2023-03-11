@@ -21,7 +21,6 @@ public class ElectricityDto {
 	private String remarks;
 	@NotNull
 	private Long amount;
-	@NotNull
-	private Long expenceId;
+
 
 }
