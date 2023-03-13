@@ -104,12 +104,14 @@ public class Student {
 	// For registration through main() method
 	public Student(@NotNull @Size(min = 3, message = "Firstname should contain atleast 3 characters") String firstName,
 			@NotNull @Size(min = 3, message = "Lastname should contain atleast 3 characters") String lastName,
+			String studentId,
 			@NotNull String email,
 			@Size(min = 10, max = 10, message = "Mobile number should contain 10 digits only") String mobile,
 			@NotNull String education, @NotNull String passingYear, @NotNull Long basePackage) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.studentId = studentId;
 		this.email = email;
 		this.mobile = mobile;
 		this.education = education;
