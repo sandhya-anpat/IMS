@@ -17,6 +17,7 @@ import com.career.attendance.entity.Attendance;
 import com.career.attendance.repo.AttendanceRepo;
 import com.career.attendance.service.AttendanceService;
 import com.career.constants.AppConstants;
+import com.career.exceptions.StudentNotFoundException;
 import com.career.mentor.repo.MentorRepo;
 
 @Service
@@ -61,6 +62,14 @@ public class AttendanceServiceImpl implements AttendanceService {
 	public List<Attendance> getAllAttendance() {
 		// TODO Auto-generated method stub
 		return attendanceRepo.findAll();
+	}
+
+	@Override
+	public Attendance findStudentByStudentId(Long id) throws StudentNotFoundException {
+		if(!attendanceRepo.existsById(id)) {
+			throw new StudentNotFoundException(); 
+		}
+		return attendanceRepo.findById(id).get(); 
 	}
 
 }

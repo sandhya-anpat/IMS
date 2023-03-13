@@ -15,6 +15,8 @@ public interface AttendanceService {
 
 	List<Attendance> getAllAttendance();
 
+	Attendance findStudentByStudentId(Long id);
+
 	 
 
 	

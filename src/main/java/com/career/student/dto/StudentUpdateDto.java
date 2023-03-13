@@ -31,18 +31,18 @@ public class StudentUpdateDto {
 //	@NotNull(message = "Email cannot be null")
 //	private String email;
 	
-	@NotNull(message = "MobileNumber cannot be null")
-	@Size
-	private String mobile;
+//	@NotNull(message = "MobileNumber cannot be null")
+//	@Size
+//	private String mobile;
 	
-	private Long mentorId;
+//	private Long mentorId;
 	
 //	@Column(name = "isContractSent", columnDefinition = "boolean default true")
-//	private boolean isContractSent = true;
+//	private boolean isContractSent = true;                    
 	
-	@CreationTimestamp
-	private LocalDateTime createdOn = LocalDateTime.now();
-	
+//	@CreationTimestamp
+//	private LocalDateTime createdOn = LocalDateTime.now();
+//	
 	@UpdateTimestamp
 	private LocalDateTime updateOn = LocalDateTime.now();
 	
@@ -55,17 +55,17 @@ public class StudentUpdateDto {
 	@NotNull
 	private String passingYear;
 	
-	@NotNull
-	private String gender;
-	
+//	@NotNull
+//	private String gender;
+//	
 	@NotNull
 	private String address;
 	
-	@NotNull
-	private LocalDateTime dob;
+//	@NotNull
+//	private LocalDateTime dob;
 	
-	@NotNull
-	private String course;
+//	@NotNull
+//	private String course;
 	
 //	private String mentor;
 
@@ -84,8 +84,8 @@ public class StudentUpdateDto {
 //	@Column(name = "formalContractGenerated", columnDefinition = "boolean default false")
 //	private boolean formalContractGenerated = false;
 //	
-	@Column(name = "batchCode", columnDefinition = "varchar default false")
-	private String batchCode = "SDE13";
+//	@Column(name = "batchCode", columnDefinition = "varchar default false")
+//	private String batchCode = "SDE13";
 
 
 }

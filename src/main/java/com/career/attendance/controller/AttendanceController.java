@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import com.career.attendance.entity.Attendance;
 import com.career.attendance.service.AttendanceService;
 import com.career.constants.AppConstants;
 import com.career.dto.ResponseDto;
+import com.career.exceptions.StudentNotFoundException;
 
 @RestController
 @RequestMapping("/attendance")
@@ -41,5 +43,12 @@ public class AttendanceController {
 	public ResponseEntity<List<Attendance>> getAllAttendance(){
 		return new ResponseEntity<List<Attendance>>(attendanceService.getAllAttendance(), HttpStatus.OK);
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Attendance> findStudentByStudentId(@PathVariable Long id) throws StudentNotFoundException{
+		return new ResponseEntity<Attendance>(attendanceService.findStudentByStudentId(id), HttpStatus.OK);
+	}
+	
+	
 
 }
