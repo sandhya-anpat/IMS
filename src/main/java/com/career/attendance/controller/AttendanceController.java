@@ -1,5 +1,6 @@
 package com.career.attendance.controller;
 
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.career.attendance.entity.Attendance;
 import com.career.attendance.service.AttendanceService;
@@ -29,8 +29,8 @@ public class AttendanceController {
 	AttendanceService attendanceService;
 
 	@PostMapping("/upload")
-	public ResponseEntity<ResponseDto> uploadFile(@RequestParam("file") MultipartFile file) throws FileUploadException {
-		if (AppConstants.ATTENDANCE_UPLOAD_FAILURE.equals(attendanceService.uploadfile(file))) {
+	public ResponseEntity<ResponseDto> uploadFile(InputStream inputStream, @RequestParam("filename") String filename) throws FileUploadException {
+		if (AppConstants.ATTENDANCE_UPLOAD_FAILURE.equals(attendanceService.uploadfile(inputStream, filename))) {
 			return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.ATTENDANCE_UPLOAD_FAILURE,
 					HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		} else {
