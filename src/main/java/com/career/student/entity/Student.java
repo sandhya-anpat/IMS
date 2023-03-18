@@ -27,8 +27,7 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@GenericGenerator(name = "studentId", strategy = "com.career.student.generator.StudentIdGenerator")
-	@GeneratedValue(generator = "studentId")
+	@Column(name = "studentId")
 	private String studentId;
 	
 	@NotNull
@@ -40,8 +39,8 @@ public class Student {
 	@Size(min = 3, message = "Lastname should contain atleast 3 characters")
 	private String lastName;
 	
-	@NotNull
-	private String email;
+
+
 	
 	private String password;
 	
@@ -100,6 +99,8 @@ public class Student {
 
 	@Column(name = "batchCode", columnDefinition = "varchar default false")
 	private String batchCode = "SDE13";
+
+	private @NotNull String email;
 
 	// For registration through main() method
 	public Student(@NotNull @Size(min = 3, message = "Firstname should contain atleast 3 characters") String firstName,

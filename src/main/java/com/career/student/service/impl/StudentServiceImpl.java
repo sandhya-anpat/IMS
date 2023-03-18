@@ -1,5 +1,6 @@
 package com.career.student.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -185,6 +186,14 @@ public class StudentServiceImpl implements StudentService {
 		else if (byEmail.size() > 0)
 			response = AppConstants.EMAIL_ALREADY_EXISTS;
 		return response;
+	}
+
+	@Override
+	public List<Student> getStudentByStudentId(String studentId) {
+		// TODO Auto-generated method stub
+		List<Student> byStudentId = new ArrayList<Student>();
+		byStudentId = studentRepo.findStudentByStudentId(studentId);
+		return byStudentId;
 	}
 
 }

@@ -128,4 +128,9 @@ public class StudentController {
 					new ResponseDto(AppConstants.STUDENT_NOT_FOUND,  HttpStatus.NOT_FOUND.value(), LocalDateTime.now().toString()),
 				HttpStatus.NOT_FOUND);	
 	}
+	
+	@GetMapping("studId/{studentId}")
+	public ResponseEntity<List<Student>> getStudentByStudentId(@PathVariable String studentId){
+		return new ResponseEntity<List<Student>>(studentService.getStudentByStudentId(studentId), HttpStatus.OK);
+	}
 }
