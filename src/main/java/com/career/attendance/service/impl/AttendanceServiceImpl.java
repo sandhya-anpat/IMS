@@ -4,32 +4,29 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.career.attendance.entity.Attendance;
 import com.career.attendance.repo.AttendanceRepo;
 import com.career.attendance.service.AttendanceService;
 import com.career.constants.AppConstants;
-<<<<<<< HEAD
+import com.career.dto.ResponseDto;
 import com.career.exceptions.StudentNotFoundException;
-import com.career.mentor.repo.MentorRepo;
-=======
->>>>>>> 7179290707d1f02ff5e2fd491c2b946ee03291b2
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
 
 	@Autowired
 	AttendanceRepo attendanceRepo;
-
-	@Autowired
-	private ModelMapper mapper;
 
 	@Override
 	public String uploadfile(InputStream inputStream, String filename) throws FileUploadException {
@@ -45,9 +42,9 @@ public class AttendanceServiceImpl implements AttendanceService {
 				sessionName = filename.substring(0, filename.indexOf("_"));
 				sessionDate = filename.substring(filename.indexOf("_") + 1, filename.indexOf("."));
 				String dd = sessionDate.substring(0, 2);
-				String mm = sessionDate.substring(2,4);
+				String mm = sessionDate.substring(2, 4);
 				String yyyy = sessionDate.substring(4);
-				sessionDate = yyyy+"-"+mm+"-"+dd;
+				sessionDate = yyyy + "-" + mm + "-" + dd;
 			}
 			List<Attendance> attendances = new ArrayList<Attendance>();
 			int count = 0;
@@ -62,7 +59,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 				attendance.setDuration(data[4].trim());
 				attendance.setFileName(filename);
 				attendance.setSessionName(sessionName);
-				attendance.setDate(sessionDate);
+				attendance.setSessionDate(getLocalDate(sessionDate));
 				attendances.add(attendance);
 			}
 			attendanceRepo.saveAllAndFlush(attendances);
@@ -73,6 +70,14 @@ public class AttendanceServiceImpl implements AttendanceService {
 		return response;
 	}
 
+	public LocalDate getLocalDate(String date) {
+		if (date == null)
+			return null;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.parse(date, formatter);
+		return localDate;
+	}
+
 	@Override
 	public List<Attendance> getAllAttendance() {
 		// TODO Auto-generated method stub
@@ -81,10 +86,32 @@ public class AttendanceServiceImpl implements AttendanceService {
 
 	@Override
 	public Attendance findStudentByStudentId(Long id) throws StudentNotFoundException {
-		if(!attendanceRepo.existsById(id)) {
-			throw new StudentNotFoundException(); 
+		if (!attendanceRepo.existsById(id)) {
+			throw new StudentNotFoundException();
 		}
-		return attendanceRepo.findById(id).get(); 
+		return attendanceRepo.findById(id).get();
+	}
+
+	@Override
+	public List<Attendance> getAttendanceByDateAndSessionName(String startDate, String endDate, String sessionName) {
+		// TODO Auto-generated method stub
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		if (startDate == null && endDate == null && sessionName == null) {
+			return attendanceRepo.findAll();
+		} else if (startDate != null && endDate != null) {
+
+			LocalDate start = LocalDate.parse(startDate, formatter);
+			LocalDate end = LocalDate.parse(endDate, formatter);
+			return attendanceRepo.findAttendanceByStartDateAndEndDate(start, end);
+		}
+
+		else {
+			return attendanceRepo.findBySessionName(sessionName);
+		}
+
+		// return AppConstants.INVALID_DATE;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.career.attendance.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,7 +39,7 @@ public class Attendance {
 	private String sessionName;
 	                  
 	@NotNull
-	private String date;
+	private LocalDate sessionDate;
 	
 	@NotNull
 	private String fileName;
