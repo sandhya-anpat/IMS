@@ -34,4 +34,6 @@ public interface StudentService {
 	String loginStudent(LoginDto loginDto) throws StudentNotFoundException;
 
 	String deleteStudentById(Long id);
+
+	List<Student> getStudentByStudentId(String studentId);
 }

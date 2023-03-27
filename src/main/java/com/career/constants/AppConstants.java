@@ -47,5 +47,6 @@ public class AppConstants {
 	public static final String INVALID_CATEGORY = "INVALID CATEGORY";
 	public static final String ATTENDANCE_UPLOAD_FAILURE = "FAILED TO UPLOAD ATTENDANCE";
 	public static final String ATTENDANCE_UPLOAD_SUCCESS = "ATTENDANCE UPLOADED SUCCESSFULLY";
+	public static final String INVALID_DATE = "INVALID DATE";
 
 }
