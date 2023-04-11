@@ -48,5 +48,8 @@ public class AppConstants {
 	public static final String ATTENDANCE_UPLOAD_FAILURE = "FAILED TO UPLOAD ATTENDANCE";
 	public static final String ATTENDANCE_UPLOAD_SUCCESS = "ATTENDANCE UPLOADED SUCCESSFULLY";
 	public static final String INVALID_DATE = "INVALID DATE";
+	public static final String INVALID_FILE_NAME = "INVALID FILE NAME";
+	public static final String VALID_FILE_NAME = "JAVA, HTML4, HTML5, CSS1, CSS2, JS1, JS2, ANG1, ANG2, ANG3, ANG4, ANG5, ANG6";
+
 
 }

@@ -39,11 +39,18 @@ public class AttendanceController {
 	@PostMapping("/upload")
 	public ResponseEntity<ResponseDto> uploadFile(@RequestParam("filename") MultipartFile file)
 			throws IOException {
+		
+		String filename=file.getName();
+		if(null != filename && validateFileName(filename)) {
 		if (AppConstants.ATTENDANCE_UPLOAD_FAILURE.equals(attendanceService.uploadfile(file.getInputStream(), file.getOriginalFilename()))) {
 			return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.ATTENDANCE_UPLOAD_FAILURE,
 					HttpStatus.BAD_REQUEST.value(), LocalDateTime.now().toString()), HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.ATTENDANCE_UPLOAD_SUCCESS,
+					HttpStatus.OK.value(), LocalDateTime.now().toString()), HttpStatus.OK);
+		}
+		}else {
+			return new ResponseEntity<ResponseDto>(new ResponseDto(AppConstants.INVALID_FILE_NAME,
 					HttpStatus.OK.value(), LocalDateTime.now().toString()), HttpStatus.OK);
 		}
 	}
@@ -67,6 +74,28 @@ public class AttendanceController {
 
 		return new ResponseEntity<List<Attendance>>(
 				attendanceService.getAttendanceByDateAndSessionName(startDate, endDate, sessionName), HttpStatus.OK);
+	}
+	
+	public static boolean validateFileName(String filename) {
+		boolean isValid = false;
+		String sessionName="";
+		String sessionDate="";
+		try {
+		if(!filename.contains("_")) {
+			return false;
+		}else {
+			sessionName=filename.substring(0, filename.indexOf("_"));
+			sessionDate=filename.substring(filename.indexOf("_")+1, filename.indexOf("."));
+		
+			if(AppConstants.VALID_FILE_NAME.contains(sessionName) && sessionDate.length()==8) {
+				isValid=true;
+			}
+		}
+		}catch(Exception ex) {
+			isValid=false;
+			ex.printStackTrace();
+		}
+		return isValid;
 	}
 
 }
